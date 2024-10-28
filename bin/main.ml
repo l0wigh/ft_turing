@@ -1,3 +1,5 @@
+(* TODO: Uncomment transitions stuff when it's finally used *)
+
 type machine_type = {
   name: string;
   alphabet: string list;
@@ -16,8 +18,15 @@ let print_machine machine =
   Format.printf "initial  : %s\n" machine.initial;
   Format.printf "finals   : %s\n" (Json_parse.create_string_from_array machine.finals)
 
+let turing_error n =
+  Format.printf "Error: Bad number of arguments. %d instead of 3.\n" n;
+  exit(1)
+
 let () =
-  let json = Yojson.Basic.from_file "42.json" in
+  let n = Array.length Sys.argv in
+  if n != 3 then turing_error n;
+
+  let json = Yojson.Basic.from_file (Sys.argv.(1)) in
   let open Yojson.Basic.Util in
 
   let machine = {
