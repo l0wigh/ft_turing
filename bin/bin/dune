@@ -1,0 +1,4 @@
+(executable
+ (public_name ft_turing_dune)
+ (name main)
+ (libraries ft_turing_dune yojson json_parse))
